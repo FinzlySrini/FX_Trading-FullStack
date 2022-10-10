@@ -1,0 +1,24 @@
+<button type="button" (click)="onBack()" class="btn btn-info">Back</button>
+<table class="table table-bordered table-hover" >
+    <thead>
+      <th>#</th>
+      <th>Name</th>
+      <th>Currency Pair</th>
+      <th>Amount</th>
+      <th>Rate</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of TradeData | paginate: { itemsPerPage: 5, currentPage: p }">
+        <td> {{item.tradeId}} </td>
+        <td>{{item.customerName| titlecase}}</td>
+        <td> {{item.currencyPair}} </td>
+        <td> {{item.amount*66.00}} </td>
+        <td>{{item.rate}}</td>
+      </tr>
+    </tbody>
+  </table>  
+  <pagination-controls (pageChange)="p = $event"
+      style="float:right ;"
+    ></pagination-controls>
+
+  

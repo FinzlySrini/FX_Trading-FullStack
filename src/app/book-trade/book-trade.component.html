@@ -1,0 +1,109 @@
+<div class="container">
+    <div class="row">
+      <div class="col-6">
+
+          <form #f="ngForm" (ngSubmit)="onSubmit(f)">
+            <div class="form-group">
+                  <label for="">Customername</label>
+                  <input type="text" class="form-control" 
+                  minlength="4" expression="^[A-Za-z][A-Za-z0-9]*$"
+                  ngModel name="customername" #customername="ngModel" required
+                  id="name"
+                  placeholder="Enter the Customername">
+
+                <div *ngIf="customername.touched && !customername.valid"  
+                class="alert alert-danger">
+                  Please enter the customer name!
+
+                  <div *ngIf="customername.errors?.minlength">
+                       Please enter the minimum length of customer name is {{customername.errors?.minlength.requiredLength}}
+
+                  </div>
+                <!-- <div *ngIf="f.customername.errors.cannotContainSpace">Username cannot contain space</div> -->
+
+                  <!-- <div *ngIf="username.errors?.pattern">
+                      ** Please Enter the appropriate pattern
+
+                  </div> -->
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="form-group">
+              <label for="currencypair">CurrencyPair</label>
+              <select ngModel name="currencypair" 
+              id="currencypair" class="form-control"  required>
+    
+               <!-- <option *ngFor="let item of country" 
+               [value]="item.cid">{{item.name}} </option> -->
+    
+               <option *ngFor="let item of allcurrencypair" 
+               [ngValue]="item">{{item}} </option>
+    
+              </select> 
+            </div>
+            <div *ngIf="amount.touched && amount.invalid"
+                 class="alert alert-danger">
+                     Please select the Currency Pair!
+
+                 </div>
+
+
+            <div class="form-group">
+                <label for="">Amount</label>
+                <input type="number" min="1" class="form-control"  
+                  ngModel name="amount" #amount="ngModel" required
+                  id="amount"
+                  placeholder="Enter the amount">
+
+
+                 <div *ngIf="amount.touched && amount.invalid"
+                 class="alert alert-danger">
+                     Please Enter the valid amount!
+
+                 </div>
+            </div>
+
+            <label for="">Do you want to get rate?</label>
+            <div >
+
+              <div class="radio" (change)="onChange($event)">
+                <label for="con0">
+                  <input ngModel #contact="ngModel" 
+                  type="radio" name="con" 
+                  id="con0" value="1" required > Yes
+                </label>
+              </div>
+      
+            <div class="radio" >
+                <label for="con1">
+                  <input ngModel #contact="ngModel" 
+                  type="radio" name="con"
+                  id="con1" value="2" required > No
+                </label> 
+              </div>
+            </div>
+            
+
+            <br>
+            <button type="submit" [disabled]="!f.valid" class="btn btn-outline-success">Submit</button> 
+            
+
+          </form>
+          <br>
+          <button type="button" (click)="onBack()" class="btn btn-info">Back</button>
+
+          <hr>
+          <span  style="color: rgb(252, 87, 224);font-weight: bold;margin-top: 5px;">
+            {{ratemsg}} </span>
+            <br><br>
+          <span  style="color: rgb(252, 87, 224);font-weight: bold;margin-top: 5px;">
+                    {{responsemsg}} </span>
+      </div>
+
+    </div>
+</div>
